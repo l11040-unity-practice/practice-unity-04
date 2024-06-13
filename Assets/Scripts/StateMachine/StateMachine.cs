@@ -27,4 +27,8 @@ public abstract class StateMachine
     {
         _currentState?.PhysicsUpdate();
     }
+    public void HandleInput()
+    {
+        _currentState?.HandleInput();
+    }
 }
