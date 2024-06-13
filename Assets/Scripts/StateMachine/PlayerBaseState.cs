@@ -1,21 +1,24 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerBaseState : IState
 {
     protected PlayerStateMachine _stateMachine;
-    protected readonly PlayerGroundData groundData;
+    protected readonly PlayerGroundData _groundData;
     public PlayerBaseState(PlayerStateMachine stateMachine)
     {
         this._stateMachine = stateMachine;
-        groundData = stateMachine.Player.Data.GroundData;
+        _groundData = stateMachine.Player.Data.GroundData;
     }
     public virtual void Enter()
     {
+        AddInputActionsCallbacks();
     }
 
     public virtual void Exit()
     {
+        RemoveInputActionsCallbacks();
     }
 
     public virtual void HandleInput()
@@ -30,6 +33,31 @@ public class PlayerBaseState : IState
     public virtual void Update()
     {
         Move();
+    }
+
+    protected virtual void AddInputActionsCallbacks()
+    {
+        PlayerController input = _stateMachine.Player.Input;
+        input.PlayerActions.Movement.canceled += OnMovementCanceled;
+        input.PlayerActions.Run.started += OnRunStarted;
+    }
+
+
+    protected virtual void RemoveInputActionsCallbacks()
+    {
+        PlayerController input = _stateMachine.Player.Input;
+        input.PlayerActions.Movement.canceled -= OnMovementCanceled;
+        input.PlayerActions.Run.started -= OnRunStarted;
+    }
+
+    protected virtual void OnRunStarted(InputAction.CallbackContext context)
+    {
+
+    }
+
+    protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
+    {
+
     }
 
     protected void StartAnimation(int animatorHash)
