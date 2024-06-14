@@ -16,6 +16,8 @@ public class PlayerAnimeData
     [SerializeField] string _attackParameterName = "@Attack";
     [SerializeField] string _comboAttackParameterName = "ComboAttack";
 
+    [SerializeField] string _baseAttackParameterName = "BaseAttack";
+
 
     public int GroundParameterHash { get; private set; }
     public int IdleParameterHash { get; private set; }
@@ -28,6 +30,8 @@ public class PlayerAnimeData
 
     public int AttackParameterHash { get; private set; }
     public int ComboAttackParameterHash { get; private set; }
+
+    public int BaseAttackParameterHash { get; private set; }
 
 
     public void Initialize()
@@ -43,5 +47,6 @@ public class PlayerAnimeData
 
         AttackParameterHash = Animator.StringToHash(_attackParameterName);
         ComboAttackParameterHash = Animator.StringToHash(_comboAttackParameterName);
+        BaseAttackParameterHash = Animator.StringToHash(_baseAttackParameterName);
     }
 }
