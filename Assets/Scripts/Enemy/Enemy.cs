@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public CharacterController Controller { get; private set; }
     public ForceReceiver ForceReceiver { get; private set; }
     private EnemyStateMachine _stateMachine;
+    [field: SerializeField] public Weapon Weapon { get; private set; }
 
     private void Awake()
     {

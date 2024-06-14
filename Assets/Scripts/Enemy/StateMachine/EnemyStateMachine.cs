@@ -9,7 +9,7 @@ public class EnemyStateMachine : StateMachine
     public float MovementSpeedModifier { get; set; } = 1f;
     public int ComboIndex { get; set; }
 
-    public GameObject Target { get; private set; }
+    public Health Target { get; private set; }
     public EnemyIdleState IdleState { get; private set; }
     public EnemyChasingState ChasingState { get; private set; }
     public EnemyAttackState AttackState { get; private set; }
@@ -18,7 +18,7 @@ public class EnemyStateMachine : StateMachine
     {
         this.Enemy = enemy;
 
-        Target = GameObject.FindGameObjectWithTag("Player");
+        Target = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         IdleState = new EnemyIdleState(this);
         ChasingState = new EnemyChasingState(this);
         AttackState = new EnemyAttackState(this);
